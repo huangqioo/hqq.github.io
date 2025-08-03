@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5个币的名 - 个人空间</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FB7299',
+                        secondary: '#23ADE5',
+                        dark: '#18191C',
+                        light: '#F5F5F7',
+                        'bilibili': '#FB7299'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-hover {
+                @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+            }
+            .btn-bilibili {
+                @apply bg-bilibili text-white font-medium py-2 px-6 rounded-full transition-all duration-300 hover:bg-opacity-90 hover:shadow-lg transform hover:-translate-y-0.5;
+            }
+            .pulse-animation {
+                animation: pulse 1.5s ease-in-out;
+            }
+            @keyframes pulse {
+                0% { background-color: rgba(251, 114, 153, 0.1); }
+                50% { background-color: rgba(251, 114, 153, 0.3); }
+                100% { background-color: rgba(251, 114, 153, 0.1); }
+            }
+            .update-badge {
+                animation: bounce 1s infinite;
+            }
+            @keyframes bounce {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-5px); }
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-md fixed w-full z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <<i class="fa fa-play-circle text-bilibili text-2xl"></</i>
+                <span class="font-bold text-xl text-dark">哔哩哔哩</span>
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#" class="text-gray-600 hover:text-bilibili transition-colors">首页</a>
+                <a href="#" class="text-gray-600 hover:text-bilibili transition-colors">番剧</a>
+                <a href="#" class="text-gray-600 hover:text-bilibili transition-colors">直播</a>
+                <a href="#" class="text-gray-600 hover:text-bilibili transition-colors">游戏中心</a>
+                <a href="#" class="text-gray-600 hover:text-bilibili transition-colors">会员购</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="hidden md:block text-gray-600 hover:text-bilibili transition-colors">
+                    <<i class="fa fa-search text-lg"></</i>
+                </button>
+                <button class="btn-bilibili text-sm flex items-center">
+                    <<i class="fa fa-user-circle mr-2"></</i>登录
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主内容区 -->
+    <main class="container mx-auto px-4 pt-24 pb-16">
+        <!-- 数据更新提示 -->
+        <div id="update-notice" class="hidden bg-bilibili/10 border-l-4 border-bilibili text-bilibili p-4 mb-6 rounded-r flex items-center">
+            <<i class="fa fa-refresh mr-2 update-badge"></</i>
+            <span>数据已更新</span>
+        </div>
+
+        <!-- 个人信息头部 -->
+        <div class="bg-gradient-to-r from-pink-500 to-purple-600 rounded-2xl shadow-xl overflow-hidden mb-8">
+            <div class="h-32 md:h-48 bg-cover bg-center" style="background-image: url('https://picsum.photos/id/325/1200/300'); opacity: 0.3;"></div>
+            <div class="px-6 md:px-10 -mt-16 mb-6 flex flex-col md:flex-row items-center">
+                <div class="w-28 h-28 md:w-36 md:h-36 rounded-full bg-white p-1 shadow-lg mb-4 md:mb-0">
+                    <img src="https://picsum.photos/id/64/200/200" alt="用户头像" class="w-full h-full object-cover rounded-full">
+                </div>
+                <div class="text-center md:text-left md:ml-6">
+                    <h1 class="text-2xl md:text-3xl font-bold text-white mb-2">5个币的名</h1>
+                    <p class="text-white text-opacity-90 text-sm md:text-base">UID: 3546931060018005</p>
+                    <div class="flex justify-center md:justify-start mt-4 space-x-3">
+                        <a href="https://b23.tv/taPul2T" target="_blank" class="bg-white text-bilibili px-4 py-2 rounded-full text-sm font-medium hover:shadow-md transition-all">
+                            <<i class="fa fa-external-link mr-1"></</i>访问空间
+                        </a>
+                        <button class="bg-transparent border-2 border-white text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-white hover:bg-opacity-10 transition-all">
+                            <<i class="fa fa-plus mr-1"></</i>关注
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 数据统计卡片 -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-white rounded-xl shadow p-5 text-center card-hover">
+                <p class="text-gray-500 text-sm mb-1">关注数</p>
+                <p id="follow-count" class="text-2xl font-bold text-dark">54</p>
+            </div>
+            <div class="bg-white rounded-xl shadow p-5 text-center card-hover">
+                <p class="text-gray-500 text-sm mb-1">粉丝数</p>
+                <p id="fans-count" class="text-2xl font-bold text-dark">2</p>
+            </div>
+            <div class="bg-white rounded-xl shadow p-5 text-center card-hover">
+                <p class="text-gray-500 text-sm mb-1">投稿数</p>
+                <p id="video-count" class="text-2xl font-bold text-dark">2</p>
+            </div>
+            <div class="bg-white rounded-xl shadow p-5 text-center card-hover">
+                <p class="text-gray-500 text-sm mb-1">合集数</p>
+                <p id="collection-count" class="text-2xl font-bold text-dark">1</p>
+            </div>
+        </div>
+
+        <!-- 内容导航 -->
+        <div class="bg-white rounded-xl shadow p-4 mb-8">
+            <div class="flex overflow-x-auto pb-2 space-x-6">
+                <a href="#" class="whitespace-nowrap text-bilibili border-b-2 border-bilibili font-medium py-2">
+                    <<i class="fa fa-home mr-1"></</i>主页
+                </a>
+                <a href="#" class="whitespace-nowrap text-gray-500 hover:text-bilibili py-2 transition-colors">
+                    <<i class="fa fa-history mr-1"></</i>动态
+                </a>
+                <a href="#" class="whitespace-nowrap text-gray-500 hover:text-bilibili py-2 transition-colors">
+                    <<i class="fa fa-video-camera mr-1"></</i>投稿
+                </a>
+                <a href="#" class="whitespace-nowrap text-gray-500 hover:text-bilibili py-2 transition-colors">
+                    <<i class="fa fa-folder-open mr-1"></</i>合集
+                </a>
+                <a href="#" class="whitespace-nowrap text-gray-500 hover:text-bilibili py-2 transition-colors">
+                    <<i class="fa fa-bookmark mr-1"></</i>收藏
+                </a>
+                <a href="#" class="whitespace-nowrap text-gray-500 hover:text-bilibili py-2 transition-colors">
+                    <<i class="fa fa-heart mr-1"></</i>追番追剧
+                </a>
+            </div>
+        </div>
+
+        <!-- 动态记录区域 -->
+        <div class="bg-white rounded-xl shadow p-6 mb-8">
+            <h2 class="text-xl font-bold mb-4 flex items-center">
+                <<i class="fa fa-clock-o text-bilibili mr-2"></</i>最新动态
+            </h2>
+            <div id="activity-feed" class="space-y-4">
+                <div class="p-3 border-b border-gray-100">
+                    <p class="text-gray-700"><<i class="fa fa-user-plus text-green-500 mr-2"></</i>新关注了 <span class="font-medium">UP主XXX</span></p>
+                    <p class="text-gray-400 text-sm mt-1">10分钟前</p>
+                </div>
+                <div class="p-3 border-b border-gray-100">
+                    <p class="text-gray-700"><<i class="fa fa-heart text-red-500 mr-2"></</i>点赞了视频 <span class="font-medium">《前端开发技巧分享》</span></p>
+                    <p class="text-gray-400 text-sm mt-1">1小时前</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 投稿内容展示 -->
+        <div class="mb-10">
+            <h2 class="text-xl font-bold mb-4 flex items-center">
+                <<i class="fa fa-video-camera text-bilibili mr-2"></</i>投稿视频
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 视频卡片1 -->
+                <div class="bg-white rounded-xl shadow overflow-hidden card-hover">
+                    <div class="relative">
+                        <img src="https://picsum.photos/id/237/600/340" alt="视频封面" class="w-full h-48 object-cover">
+                        <div class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                            05:30
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-medium text-lg mb-2 line-clamp-2">这是第一个投稿视频的标题，可能有点长需要截断显示</h3>
+                        <div class="flex justify-between items-center text-gray-500 text-sm">
+                            <span><<i class="fa fa-eye mr-1"></</i> <span class="view-count-1">1.2万</span></span>
+                            <span><<i class="fa fa-comment mr-1"></</i> <span class="comment-count-1">32</span></span>
+                            <span><<i class="fa fa-heart mr-1"></</i> <span class="like-count-1">156</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 视频卡片2 -->
+                <div class="bg-white rounded-xl shadow overflow-hidden card-hover">
+                    <div class="relative">
+                        <img src="https://picsum.photos/id/160/600/340" alt="视频封面" class="w-full h-48 object-cover">
+                        <div class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                            10:15
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-medium text-lg mb-2 line-clamp-2">这是第二个投稿视频的标题，同样可能需要处理长标题的情况</h3>
+                        <div class="flex justify-between items-center text-gray-500 text-sm">
+                            <span><<i class="fa fa-eye mr-1"></</i> <span class="view-count-2">8.7千</span></span>
+                            <span><<i class="fa fa-comment mr-1"></</i> <span class="comment-count-2">18</span></span>
+                            <span><<i class="fa fa-heart mr-1"></</i> <span class="like-count-2">94</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 控制按钮区域 -->
+        <div class="text-center py-8">
+            <a href="https://b23.tv/taPul2T" target="_blank" class="btn-bilibili inline-flex items-center text-lg">
+                <<i class="fa fa-bilibili mr-2"></</i>前往哔哩哔哩个人空间
+            </a>
+            <div class="mt-6">
+                <button id="refresh-btn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-6 rounded-full transition-all duration-300 inline-flex items-center">
+                    <<i class="fa fa-refresh mr-2"></</i>手动刷新数据
+                </button>
+            </div>
+            <p class="text-gray-500 mt-3">数据每30秒自动更新一次</p>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-10">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center space-x-2 mb-3">
+                        <<i class="fa fa-play-circle text-bilibili text-2xl"></</i>
+                        <span class="font-bold text-xl">哔哩哔哩</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">二次元爱好者社区</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-bilibili transition-colors">
+                        <<i class="fa fa-weibo text-xl"></</i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-bilibili transition-colors">
+                        <<i class="fa fa-wechat text-xl"></</i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-bilibili transition-colors">
+                        <<i class="fa fa-qq text-xl"></</i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-bilibili transition-colors">
+                        <<i class="fa fa-twitter text-xl"></</i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400 text-sm">
+                <p>© 2023 哔哩哔哩 (゜-゜)つロ 干杯~</p>
+                <p class="mt-1">本页面仅作展示，数据来源于用户提供信息</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-white/95', 'backdrop-blur-sm');
+                nav.classList.remove('bg-white');
+            } else {
+                nav.classList.add('bg-white');
+                nav.classList.remove('bg-white/95', 'backdrop-blur-sm');
+            }
+        });
+
+        // 数据更新功能
+        function updateData() {
